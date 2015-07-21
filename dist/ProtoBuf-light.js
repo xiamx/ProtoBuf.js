@@ -21,7 +21,10 @@
  */
 (function(global, factory) {
 
-    /* AMD */ if (typeof define === 'function' && define["amd"])
+    /* Electron */ if (typeof window !== 'undefined' && window.process && window.process.type === "Renderer") {
+        (global["dcodeIO"] = global["dcodeIO"] || {})["ProtoBuf"] = factory(global["dcodeIO"]["ByteBuffer"]);
+    }
+    /* AMD */ else if (typeof define === 'function' && define["amd"])
         define(["ByteBuffer"], factory);
     /* CommonJS */ else if (typeof require === "function" && typeof module === "object" && module && module["exports"])
         module["exports"] = factory(require("bytebuffer"), require);
